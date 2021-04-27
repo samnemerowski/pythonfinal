@@ -1,5 +1,5 @@
-pandas as pd
+pandas
 matplotlib.pyplot
 statistics
-streamlit as st
-numpy as np
+streamlit
+numpy
