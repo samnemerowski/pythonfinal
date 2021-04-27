@@ -10,7 +10,6 @@ import statistics
 import streamlit as st
 import numpy as np
 import pip
-from pip import pipreqs
 
 csv = pd.read_csv("craigslistcars.csv")
 data = csv.drop(columns="description")
