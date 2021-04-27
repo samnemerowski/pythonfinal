@@ -1,5 +1,5 @@
-import pandas as pd
-import matplotlib.pyplot as plt
-import statistics
-import streamlit as st
-import numpy as np
+pandas as pd
+matplotlib.pyplot
+statistics
+streamlit as st
+numpy as np
