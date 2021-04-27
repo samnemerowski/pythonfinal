@@ -2,6 +2,7 @@
 Sam Nemerowski
 Professor Masloff
 CS230 Final Project
+streamlit sharing link: https://share.streamlit.io/samnemerowski/pythonfinal/main/FinalProject.py
 """
 
 import pandas as pd
@@ -41,7 +42,7 @@ def descriptive_statistics():
 def simple_map():
     MAPKEY = "pk.eyJ1IjoiY2hlY2ttYXJrIiwiYSI6ImNrOTI0NzU3YTA0azYzZ21rZHRtM2tuYTcifQ.6aQ9nlBpGbomhySWPF98DApk.eyJ1IjoiY2hlY2ttYXJrIiwiYSI6ImNrOTI0NzU3YTA0azYzZ21rZHRtM2tuYTcifQ.6aQ9nlBpGbomhySWPF98DA"
     orig_data = pd.read_csv("craigslistcars.csv")
-    revised_data = orig_data.dropna()
+    revised_data = orig_data.dropna()        # removes listings missing latitude and longitude
     locations = zip(revised_data["lat"], revised_data["lon"])
     df = pd.DataFrame(locations, columns=["lat", "lon"])
     st.title("Used Cars Across America")
@@ -49,7 +50,7 @@ def simple_map():
 
 
 def choose_price():
-    selected_price = st.sidebar.slider("Select your price range", 0, 100000, (0, 100000))
+    selected_price = st.sidebar.slider("Select your price range", 0, 100000, (0, 100000))      # allows user to select a max and min price
     return selected_price
 
 
@@ -58,7 +59,7 @@ def histogram():
     fig, ax = plt.subplots()
     bins_list = []
     for num in range(1, 90000, 10000):
-        bins_list.append(num)
+        bins_list.append(num)      # assigning bins by increments of 10000
     ax.hist(hist_values, bins=bins_list, color="r")
     ax.set_xticks = bins_list
     st.title("Histogram of Used Cars by Price")
@@ -95,13 +96,13 @@ def main():
     histogram()
     selected_manufacturer = st.sidebar.selectbox("Which manufacturer would you like?", manufacturers)
     data2 = data[data.manufacturer == selected_manufacturer]
-    st.write(data2)
+    st.write(data2)    # displays only data that matches manufacturer selection
     selected_state = st.sidebar.selectbox("Which state would you like to purchase from?", states)
     data2 = data2[data2.state == selected_state]
-    st.write(data2)
+    st.write(data2)    # displays data that matches both selections
     selected_color = st.sidebar.selectbox("What color do you want your car to be?", colors)
     data2 = data2[data2.paint_color == selected_color]
-    st.write(data2)
+    st.write(data2)    # displays data that matches 3 selections
     selected_price = choose_price()
     data2 = data2[data2.price > selected_price[0]]
     data2 = data2[data2.price < selected_price[1]]
@@ -109,13 +110,12 @@ def main():
         st.write("Congrats! There is a car for you!")
     else:
         st.write("Sorry, we don't have a car for you.")
-    st.write(data2)
+    st.write(data2)    # displays final car if it matches all selections
 
 
 states = data["state"].unique()
 years = data["year"].tolist()
 manufacturers = data["manufacturer"].unique()
-manufacturers_list = data["manufacturer"].tolist()
 models = data["model"].tolist()
 colors = data["paint_color"].unique()
 prices = data["price"].tolist()
